@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Theme Colors -->
+    <color name="pantry_green">#2E7D32</color>
+    <color name="pantry_green_dark">#1B5E20</color>
+    <color name="pantry_green_light">#E8F5E9</color>
+    <color name="pantry_accent">#388E3C</color>
+
+    <!-- Status Badge Colors -->
+    <color name="status_good_bg">#E8F5E9</color>
+    <color name="status_good_text">#2E7D32</color>
+
+    <color name="status_warning_bg">#FFF3E0</color>
+    <color name="status_warning_text">#E65100</color>
+
+    <color name="status_expired_bg">#FFEBEE</color>
+    <color name="status_expired_text">#C62828</color>
+
+    <color name="status_low_stock_bg">#EDE7F6</color>
+    <color name="status_low_stock_text">#512DA8</color>
+</resources>
