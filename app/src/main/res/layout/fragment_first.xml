@@ -22,31 +22,32 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/pantry_title"
+            android:text="@string/recipes_title"
             android:textSize="26sp"
             android:textStyle="bold"
             android:textColor="@color/pantry_green_dark" />
 
         <TextView
-            android:id="@+id/text_item_count"
+            android:id="@+id/text_recipe_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/status_badge_background"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:textColor="@color/pantry_green_dark"
             android:textSize="13sp"
             android:textStyle="bold"
-            tools:text="8 items" />
+            tools:text="12 recipes" />
     </LinearLayout>
 
-    <!-- Simple Search Bar -->
+    <!-- Search Bar -->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="12dp"
-        android:hint="@string/search_hint"
+        android:hint="@string/search_recipes_hint"
         app:startIconDrawable="@drawable/ic_search"
         app:boxCornerRadiusTopStart="12dp"
         app:boxCornerRadiusTopEnd="12dp"
@@ -75,7 +76,7 @@
         <ImageView
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:contentDescription="@string/empty_pantry_title"
+            android:contentDescription="@string/empty_recipes_title"
             android:src="@drawable/ic_pantry"
             app:tint="#B0B0B0" />
 
@@ -83,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/empty_pantry_title"
+            android:text="@string/empty_recipes_title"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#666666" />
@@ -92,19 +93,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/empty_pantry_desc"
+            android:text="@string/empty_recipes_desc"
             android:textSize="13sp"
             android:textColor="#999999" />
     </LinearLayout>
 
-    <!-- Simple Item List -->
+    <!-- Recipe List -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_pantry"
+        android:id="@+id/recycler_recipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingBottom="80dp"
+        android:paddingBottom="24dp"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_pantry" />
+        tools:listitem="@layout/item_recipe" />
 
 </LinearLayout>

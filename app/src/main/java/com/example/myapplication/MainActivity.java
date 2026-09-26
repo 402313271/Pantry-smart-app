@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -45,15 +44,6 @@ public class MainActivity extends AppCompatActivity {
             appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         }
-
-        binding.fab.setOnClickListener(view -> {
-            if (navHostFragment != null) {
-                Fragment currentFragment = navHostFragment.getChildFragmentManager().getPrimaryNavigationFragment();
-                if (currentFragment instanceof FirstFragment) {
-                    ((FirstFragment) currentFragment).showAddItemDialog();
-                }
-            }
-        });
     }
 
     @Override
