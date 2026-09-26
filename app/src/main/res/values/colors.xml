@@ -3,22 +3,35 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Primary Theme Colors -->
+    <!-- Blue, Green, Black Theme Palette -->
+    <color name="theme_blue">#1976D2</color>
+    <color name="theme_blue_dark">#0D47A1</color>
+    <color name="theme_blue_light">#E3F2FD</color>
+
+    <color name="theme_green">#2E7D32</color>
+    <color name="theme_green_dark">#1B5E20</color>
+    <color name="theme_green_light">#E8F5E9</color>
+
+    <!-- Compatibility Aliases -->
     <color name="pantry_green">#2E7D32</color>
     <color name="pantry_green_dark">#1B5E20</color>
     <color name="pantry_green_light">#E8F5E9</color>
-    <color name="pantry_accent">#388E3C</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary_black">#000000</color>
+    <color name="text_blue">#0D47A1</color>
+    <color name="text_green">#2E7D32</color>
 
     <!-- Status Badge Colors -->
     <color name="status_good_bg">#E8F5E9</color>
-    <color name="status_good_text">#2E7D32</color>
+    <color name="status_good_text">#1B5E20</color>
 
-    <color name="status_warning_bg">#FFF3E0</color>
-    <color name="status_warning_text">#E65100</color>
+    <color name="status_warning_bg">#E8F5E9</color>
+    <color name="status_warning_text">#2E7D32</color>
 
-    <color name="status_expired_bg">#FFEBEE</color>
-    <color name="status_expired_text">#C62828</color>
+    <color name="status_expired_bg">#E8F5E9</color>
+    <color name="status_expired_text">#1B5E20</color>
 
-    <color name="status_low_stock_bg">#EDE7F6</color>
-    <color name="status_low_stock_text">#512DA8</color>
+    <color name="status_low_stock_bg">#E3F2FD</color>
+    <color name="status_low_stock_text">#0D47A1</color>
 </resources>

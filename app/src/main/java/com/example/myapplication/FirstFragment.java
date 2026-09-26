@@ -17,6 +17,7 @@ import com.example.myapplication.adapter.RecipeAdapter;
 import com.example.myapplication.databinding.DialogRecipeDetailBinding;
 import com.example.myapplication.databinding.FragmentFirstBinding;
 import com.example.myapplication.model.Recipe;
+import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     private RecipeAdapter adapter;
+    private String selectedCategory = "All";
 
     @Override
     public View onCreateView(
@@ -42,6 +44,7 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setupRecyclerView();
+        setupCategoryFilters();
         setupSearch();
         load12BreakfastRecipes();
     }
@@ -50,6 +53,22 @@ public class FirstFragment extends Fragment {
         adapter = new RecipeAdapter(this::showRecipeDetailDialog);
         binding.recyclerRecipes.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerRecipes.setAdapter(adapter);
+    }
+
+    private void setupCategoryFilters() {
+        binding.chipGroupCategories.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (!checkedIds.isEmpty()) {
+                int chipId = checkedIds.get(0);
+                Chip chip = group.findViewById(chipId);
+                if (chip != null) {
+                    selectedCategory = chip.getText().toString();
+                    applyFilter();
+                }
+            } else {
+                selectedCategory = "All";
+                applyFilter();
+            }
+        });
     }
 
     private void setupSearch() {
@@ -69,7 +88,7 @@ public class FirstFragment extends Fragment {
 
     private void applyFilter() {
         String query = binding.editSearch.getText() != null ? binding.editSearch.getText().toString() : "";
-        adapter.filter(query);
+        adapter.filter(query, selectedCategory);
         checkEmptyState();
         updateCount();
     }
@@ -93,7 +112,14 @@ public class FirstFragment extends Fragment {
         DialogRecipeDetailBinding detailBinding = DialogRecipeDetailBinding.inflate(getLayoutInflater());
 
         detailBinding.textDetailTitle.setText(recipe.getTitle());
+        detailBinding.textDetailCategory.setText(recipe.getCategory());
         detailBinding.textDetailMeta.setText("⏱ Prep: " + recipe.getPrepTime() + "  •  👥 Servings: " + recipe.getServings());
+
+        StringBuilder ingBuilder = new StringBuilder();
+        for (String ing : recipe.getIngredients()) {
+            ingBuilder.append("• ").append(ing).append("\n");
+        }
+        detailBinding.textDetailIngredients.setText(ingBuilder.toString().trim());
 
         StringBuilder instBuilder = new StringBuilder();
         int step = 1;
@@ -145,7 +171,7 @@ public class FirstFragment extends Fragment {
                 Arrays.asList("Toast sourdough slices until crispy.", "Mash ripe avocado with lemon juice, sea salt, and black pepper in a small bowl.", "Poach or fry egg in a pan to desired doneness.", "Spread mashed avocado evenly onto toasted sourdough.", "Top with egg and sprinkle red pepper flakes over top.")
         ));
 
-        // 4. Oatmeal with Berries & Honey
+        // 4. Overnight Oats
         recipes.add(new Recipe(
                 UUID.randomUUID().toString(),
                 "Overnight Oats",
@@ -167,7 +193,7 @@ public class FirstFragment extends Fragment {
                 Arrays.asList("Whisk eggs, milk, ground cinnamon, and vanilla extract in a shallow bowl.", "Melt butter in a large skillet over medium heat.", "Dip bread slices into egg mixture, coating both sides thoroughly.", "Place bread on hot skillet and cook 2–3 minutes per side until golden brown.", "Serve warm topped with butter and maple syrup.")
         ));
 
-        // 6.Smoothie Bowl
+        // 6. Smoothie Bowl
         recipes.add(new Recipe(
                 UUID.randomUUID().toString(),
                 "Smoothie Bowl",
@@ -222,7 +248,7 @@ public class FirstFragment extends Fragment {
                 Arrays.asList("Add frozen banana, frozen strawberries, and almond milk into a high-speed blender.", "Blend on high until thick, creamy, and spoonable.", "Pour smoothie thick mixture into a bowl.", "Arrange chia seeds, crunchy granola, and fresh banana or berry slices neatly on top.")
         ));
 
-        // 11.Peanut Butter and Banana Toast
+        // 11. Peanut Butter and Banana Toast
         recipes.add(new Recipe(
                 UUID.randomUUID().toString(),
                 "Peanut Butter and Banana Toast",
