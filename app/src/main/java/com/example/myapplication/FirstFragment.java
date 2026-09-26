@@ -156,6 +156,93 @@ public class FirstFragment extends Fragment {
                 Arrays.asList("Combine oats, milk and honey in a jar", "stir, and refrigerate overnighty.", "Warm in the morning into a bowl.", "Add fruit of your choice.", "Drizzle with honey and serve warm.")
         ));
 
+        // 5. Classic French Toast
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Classic French Toast",
+                "Sweet",
+                "10 mins",
+                "2 servings",
+                Arrays.asList("4 Slices Thick Brioche or Challah Bread", "2 Large Eggs", "1/4 cup Whole Milk", "1/2 tsp Ground Cinnamon", "1 tsp Vanilla Extract", "1 tbsp Butter"),
+                Arrays.asList("Whisk eggs, milk, ground cinnamon, and vanilla extract in a shallow bowl.", "Melt butter in a large skillet over medium heat.", "Dip bread slices into egg mixture, coating both sides thoroughly.", "Place bread on hot skillet and cook 2–3 minutes per side until golden brown.", "Serve warm topped with butter and maple syrup.")
+        ));
+
+        // 6.Smoothie Bowl
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Smoothie Bowl",
+                "Quick",
+                "4 mins",
+                "2 servings",
+                Arrays.asList("Frozen fruit", "milk or yogurt", "and toppings like granola and seeds."),
+                Arrays.asList("Blend fruit and milk until thick", "pour into a bowl", "and add toppings.")
+        ));
+
+        // 7. Greek Yogurt & Granola Parfait
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Greek Yogurt Parfait",
+                "Quick",
+                "5 mins",
+                "1 serving",
+                Arrays.asList("1 cup Plain Greek Yogurt", "1/2 cup Honey Oat Granola", "1/2 cup Mixed Berries (Blueberries, Strawberries)", "1 tbsp Maple Syrup or Honey"),
+                Arrays.asList("Spoon half of the Greek yogurt into the bottom of a glass or parfait bowl.", "Add a layer of half the granola and berries.", "Repeat with remaining yogurt, granola, and berries.", "Drizzle honey or maple syrup over the top and enjoy immediately.")
+        ));
+
+        // 8. Classic Cheese Omelette
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Classic Cheese Omelette",
+                "Eggs",
+                "8 mins",
+                "1 serving",
+                Arrays.asList("3 Large Eggs", "1 tbsp Butter", "1/4 cup Shredded Sharp Cheddar Cheese", "Salt & Pepper to taste", "Fresh Herbs"),
+                Arrays.asList("Whisk eggs with salt and pepper until light and airy.", "Melt butter in an 8-inch non-stick skillet over medium-low heat.", "Pour in eggs and swirl pan so eggs coat the bottom evenly.", "When eggs are mostly set but top is slightly moist, sprinkle cheese over one half.", "Fold omelette over cheese, cook for 30 more seconds until cheese melts, and slide onto plate.")
+        ));
+
+        // 9. Bacon, Egg & Cheese Sandwich
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Bacon, Egg & Cheese Muffin",
+                "Savory",
+                "10 mins",
+                "1 serving",
+                Arrays.asList("1 English Muffin", "1 Large Egg", "2 Slices Crispy Cooked Bacon", "1 Slice American or Cheddar Cheese", "1/2 tbsp Butter"),
+                Arrays.asList("Split and toast English muffin until golden.", "Melt butter in skillet and cook egg sunny-side up or over-easy.", "Place cheese slice on bottom half of warm toasted muffin.", "Top with hot fried egg and crispy bacon slices.", "Cover with top muffin half and press down gently before serving.")
+        ));
+
+        // 10. Banana Berry Smoothie Bowl
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Banana Berry Smoothie Bowl",
+                "Smoothies",
+                "5 mins",
+                "1 serving",
+                Arrays.asList("1 Frozen Banana", "1/2 cup Frozen Strawberries", "1/4 cup Almond Milk", "1 tbsp Chia Seeds", "2 tbsp Granola", "Fresh Sliced Fruit"),
+                Arrays.asList("Add frozen banana, frozen strawberries, and almond milk into a high-speed blender.", "Blend on high until thick, creamy, and spoonable.", "Pour smoothie thick mixture into a bowl.", "Arrange chia seeds, crunchy granola, and fresh banana or berry slices neatly on top.")
+        ));
+
+        // 11.Peanut Butter and Banana Toast
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Peanut Butter and Banana Toast",
+                "Sweet",
+                "5 mins",
+                "1 servings",
+                Arrays.asList( "Whole-grain bread", "peanut butter", "banana slices", "and a drizzle of honey."),
+                Arrays.asList("Spread peanut butter on toast", "top with banana", "and finish with honey.")
+        ));
+
+        // 12. Overnight Chia Seed Pudding
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Overnight Chia Seed Pudding",
+                "Quick",
+                "5 mins",
+                "2 servings",
+                Arrays.asList("1/4 cup Chia Seeds", "1 cup Unsweetened Almond Milk", "1 tbsp Pure Maple Syrup", "1/2 tsp Vanilla Extract", "Sliced Mango or Berries for topping"),
+                Arrays.asList("Whisk chia seeds, almond milk, maple syrup, and vanilla extract together in a mason jar.", "Let sit for 10 minutes, then whisk again to prevent chia seeds from settling.", "Cover jar and chill in refrigerator for at least 4 hours (preferably overnight).", "Top with fresh sliced mango or berries before serving cold.")
+        ));
 
         adapter.setRecipes(recipes);
         updateCount();
