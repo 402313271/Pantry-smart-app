@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.myapplication.adapter.RecipeAdapter;
 import com.example.myapplication.databinding.DialogRecipeDetailBinding;
 import com.example.myapplication.databinding.FragmentFirstBinding;
+import com.example.myapplication.db.PantryDatabaseHelper;
+import com.example.myapplication.model.PantryItem;
 import com.example.myapplication.model.Recipe;
 import com.google.android.material.chip.Chip;
 
@@ -28,6 +30,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     private RecipeAdapter adapter;
+    private PantryDatabaseHelper dbHelper;
     private String selectedCategory = "All";
 
     @Override
@@ -43,10 +46,12 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        dbHelper = new PantryDatabaseHelper(requireContext());
+
         setupRecyclerView();
         setupCategoryFilters();
         setupSearch();
-        load12BreakfastRecipes();
+        loadBreakfastRecipes();
     }
 
     private void setupRecyclerView() {
@@ -88,7 +93,15 @@ public class FirstFragment extends Fragment {
 
     private void applyFilter() {
         String query = binding.editSearch.getText() != null ? binding.editSearch.getText().toString() : "";
-        adapter.filter(query, selectedCategory);
+        List<PantryItem> pantryItems = dbHelper.getAllItems();
+        List<String> availablePantryIngredients = new ArrayList<>();
+        for (PantryItem item : pantryItems) {
+            if (item.getQuantity() > 0) {
+                availablePantryIngredients.add(item.getName().toLowerCase());
+            }
+        }
+
+        adapter.filter(query, selectedCategory, availablePantryIngredients);
         checkEmptyState();
         updateCount();
     }
@@ -135,7 +148,7 @@ public class FirstFragment extends Fragment {
                 .show();
     }
 
-    private void load12BreakfastRecipes() {
+    private void loadBreakfastRecipes() {
         List<Recipe> recipes = new ArrayList<>();
 
         // 1. Classic Scrambled Eggs
@@ -268,6 +281,39 @@ public class FirstFragment extends Fragment {
                 "2 servings",
                 Arrays.asList("1/4 cup Chia Seeds", "1 cup Unsweetened Almond Milk", "1 tbsp Pure Maple Syrup", "1/2 tsp Vanilla Extract", "Sliced Mango or Berries for topping"),
                 Arrays.asList("Whisk chia seeds, almond milk, maple syrup, and vanilla extract together in a mason jar.", "Let sit for 10 minutes, then whisk again to prevent chia seeds from settling.", "Cover jar and chill in refrigerator for at least 4 hours (preferably overnight).", "Top with fresh sliced mango or berries before serving cold.")
+        ));
+
+        // 13. Egg Sandwich
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Egg Sandwich",
+                "Healthy",
+                "5 mins",
+                "1 servings",
+                Arrays.asList("Whole-grain bread", "egg", "salt", "and pepper."),
+                Arrays.asList("Start off by toasting the bread ", "crack an egg into a mug", "Season with salt and pepper and beat with a fork.", "Microwave for 30 seconds, stir, and then microwave for an additional 30 seconds.")
+        ));
+
+        // 14. Banana Toast
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Banana Toast",
+                "Quick",
+                "5 mins",
+                "1 servings",
+                Arrays.asList("Bread", "Banana", "honey Syrup."),
+                Arrays.asList("Toast the bread", "slice the banana and place on toast", "drip honey syrup.")
+        ));
+
+        // 15. Microwave Scrambled Egg
+        recipes.add(new Recipe(
+                UUID.randomUUID().toString(),
+                "Microwave Scrambled Egg",
+                "Healthy",
+                "5 mins",
+                "1 servings",
+                Arrays.asList("Eggs", "milk", "salt and pepper."),
+                Arrays.asList("Crack the eggs into a bowl", "Whisk with milk and season with salt and pepper", "microwave for 90 seconds", "serve immediately.")
         ));
 
         adapter.setRecipes(recipes);

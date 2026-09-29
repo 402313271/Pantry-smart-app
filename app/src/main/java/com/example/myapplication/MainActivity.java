@@ -3,12 +3,14 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,9 +43,33 @@ public class MainActivity extends AppCompatActivity {
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
 
-            appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+            appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.navigation_home,
+                    R.id.navigation_pantry,
+                    R.id.navigation_recipes,
+                    R.id.navigation_settings
+            ).build();
+
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
+
+            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                if (destination.getId() == R.id.navigation_pantry) {
+                    binding.fab.setVisibility(View.VISIBLE);
+                } else {
+                    binding.fab.setVisibility(View.GONE);
+                }
+            });
         }
+
+        binding.fab.setOnClickListener(view -> {
+            if (navHostFragment != null) {
+                Fragment currentFragment = navHostFragment.getChildFragmentManager().getPrimaryNavigationFragment();
+                if (currentFragment instanceof PantryFragment) {
+                    ((PantryFragment) currentFragment).showAddItemDialog();
+                }
+            }
+        });
     }
 
     @Override

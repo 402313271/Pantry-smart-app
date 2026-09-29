@@ -17,15 +17,17 @@ import java.util.List;
 
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryViewHolder> {
 
-    public interface OnItemChangeListener {
-        void onItemChanged();
+    public interface OnItemActionListener {
+        void onItemQuantityChanged(PantryItem item);
+        void onItemClick(PantryItem item);
+        void onItemLongClick(PantryItem item);
     }
 
     private final List<PantryItem> masterList = new ArrayList<>();
     private final List<PantryItem> displayedList = new ArrayList<>();
-    private final OnItemChangeListener listener;
+    private final OnItemActionListener listener;
 
-    public PantryAdapter(OnItemChangeListener listener) {
+    public PantryAdapter(OnItemActionListener listener) {
         this.listener = listener;
     }
 
@@ -113,12 +115,23 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
                 binding.textExpiration.setTextColor(ContextCompat.getColor(context, R.color.status_good_text));
             }
 
-            // Plus & Minus buttons
+            // Click to Edit item
+            binding.getRoot().setOnClickListener(v -> {
+                if (listener != null) listener.onItemClick(item);
+            });
+
+            // Long click to Delete item
+            binding.getRoot().setOnLongClickListener(v -> {
+                if (listener != null) listener.onItemLongClick(item);
+                return true;
+            });
+
+            // Plus & Minus buttons for Quantity Update
             binding.buttonPlus.setOnClickListener(v -> {
                 item.setQuantity(item.getQuantity() + 1);
                 binding.textQuantityNum.setText(String.valueOf(item.getQuantity()));
                 binding.textItemDetails.setText(item.getCategory() + " • Qty: " + item.getQuantity() + " " + item.getUnit());
-                if (listener != null) listener.onItemChanged();
+                if (listener != null) listener.onItemQuantityChanged(item);
             });
 
             binding.buttonMinus.setOnClickListener(v -> {
@@ -135,7 +148,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
                     binding.textQuantityNum.setText(String.valueOf(newQty));
                     binding.textItemDetails.setText(item.getCategory() + " • Qty: " + newQty + " " + item.getUnit());
                 }
-                if (listener != null) listener.onItemChanged();
+                if (listener != null) listener.onItemQuantityChanged(item);
             });
         }
     }
